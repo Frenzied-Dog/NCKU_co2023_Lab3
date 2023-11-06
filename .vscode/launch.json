@@ -1,0 +1,83 @@
+{
+	"configurations": [
+		{
+			"name": "C/C++: gcc 建置及偵錯使用中的檔案",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${fileDirname}/${fileBasenameNoExtension}",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"miDebuggerPath": "/usr/bin/gdb",
+			"setupCommands": [
+			  {
+				"description": "啟用 gdb 的美化顯示",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+			  },
+			  {
+				"description": "將反組譯碼變體設為 Intel",
+				"text": "-gdb-set disassembly-flavor intel",
+				"ignoreFailures": true
+			  }
+			],
+			"preLaunchTask": "C/C++: gcc 建置使用中檔案"
+		},
+		{
+			"name": "C/C++: SUKUDO_Debug",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${fileDirname}/emu.elf",
+			"args": ["0x0","${fileDirname}/../output/main.bin"],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"miDebuggerPath": "/usr/bin/gdb",
+			"setupCommands": [
+			{
+				"description": "啟用 gdb 的美化顯示",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+			},
+			{
+				"description": "將反組譯碼變體設為 Intel",
+				"text": "-gdb-set disassembly-flavor intel",
+				"ignoreFailures": true
+			}
+			],
+			"preLaunchTask": "C/C++: Make"
+		},
+		{
+			"name": "C/C++: TEST_Debug",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${fileDirname}/main.elf",
+			"args": ["0x0","${workspaceFolder}/unit_test/out/rv32ui-p-sb.bin"],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"miDebuggerPath": "/usr/bin/gdb",
+			"setupCommands": [
+			{
+				"description": "啟用 gdb 的美化顯示",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+			},
+			{
+				"description": "將反組譯碼變體設為 Intel",
+				"text": "-gdb-set disassembly-flavor intel",
+				"ignoreFailures": true
+			}
+			],
+			"preLaunchTask": "C/C++: Make"
+		}
+	],
+	"version": "2.0.0"
+}
