@@ -19,19 +19,20 @@ prog:
     lw a1, 0(t3)
     call printf
 
-    li t4, 16 # t4 = 16 
-    li t1, 1 # t1 = 1
+    li t4, 16
+    li t1, 1
 
     print_puzzle_l:
         slli t2, t1, 2
         la t3, case_2
-        add t3, t3, t2 # t3 = t3 + t2
+        add t3, t3, t2
         la a0, fmt2
         lw a1, 0(t3)
         call printf
-        addi t1, t1, 1 # t1 = t1 + 1
+
+        addi t1, t1, 1
         bne t1, t4, print_puzzle_l
-        tail exit
+    tail exit
 
 # s1 = nRow              s2 = nCol
 # s3 = num
@@ -54,11 +55,11 @@ solver:
     mv s6, a1
     mv s7, a2
     li t6, 4
-    beq a1, t6, ret_t1 # if a1 == t6 then ret_t1
+    beq a1, t6, ret_t1
     
     mv s1, a1
     addi s2, a2, 1
-    bne s2, t6, go1 # if s2 != t6 then go1
+    bne s2, t6, go1
         addi s1, s1, 1
         li s2, 0
     go1:
@@ -69,7 +70,7 @@ solver:
     add s4, s4, a0
     lw t1, 0(s4)
     li t5, -1
-    beq t1, t5, go2 # if t1 == t5 then go2
+    beq t1, t5, go2
         mv a0, s5
         mv a1, s1
         mv a2, s2
@@ -80,6 +81,7 @@ solver:
     li s3, 0
     loop1:
         addi s3, s3, 1
+        
         mv a0, s5
         mv a1, s6
         mv a2, s7
@@ -95,17 +97,17 @@ solver:
             li t5, -1
             sw t5, 0(s4) 
         go3:
-        bne s3, t6, loop1 # if s3 != t6 then loop1
+        bne s3, t6, loop1
     
     j ret_f1
 
 ret_f1:
     li a0, 0
-    j re1
+    j re
 ret_t1:
     li a0, 1
-    j re1
-re1:
+    j re
+re:
     lw s7, 28(sp)
     lw s6, 24(sp)
     lw s5, 20(sp)
@@ -160,11 +162,9 @@ is_valid:
     
     j ret_t2
 
-
 ret_f2:
     li a0, 0
     ret
-
 ret_t2:
     li a0, 1
     ret
@@ -174,7 +174,6 @@ exit:
     call putchar
     li a0, 0
     ecall
-
 
 fmt1:
     .string "%d"
