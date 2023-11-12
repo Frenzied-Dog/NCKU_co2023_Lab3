@@ -75,7 +75,7 @@ solver:
         mv a1, s1
         mv a2, s2
         call solver
-        j re1
+        j re
     go2:
 
     li s3, 0
@@ -142,23 +142,43 @@ is_valid:
     andi t1, a1, 0xfe # baseRow
     andi t2, a2, 0xfe # baseCol
 
-    addi t3, t1, 2
-    loop3_1:
+    li t3, 4
+    loop3:
         addi t3, t3, -1
 
-        addi t4, t2, 2
-        loop3_2:
-            addi t4, t4, -1
+        srli t4, t3, 1 # i/2
+        add t4, t4, t1
+        slli t4, t4, 2
 
-            slli t5, t3, 2
-            add t5, t5, t4
-            slli t5, t5, 2
-            add t5, t5, a0
-            lw t5, 0(t5) 
-            beq t5, a3, ret_f2 
+        andi t5, t3, 0x01 # i%2
+        add t5, t5, t2
 
-            bne t4, t2, loop3_2
-        bne t3, t1, loop3_1 
+        add t5, t5, t4
+
+        slli t5, t5, 2
+        add t5, t5, a0
+        lw t5, 0(t5) 
+
+        beq t5, a3, ret_f2
+        bnez t3, loop3
+
+    # addi t3, t1, 2
+    # loop3_1:
+    #     addi t3, t3, -1
+
+    #     addi t4, t2, 2
+    #     loop3_2:
+    #         addi t4, t4, -1
+
+    #         slli t5, t3, 2
+    #         add t5, t5, t4
+    #         slli t5, t5, 2
+    #         add t5, t5, a0
+    #         lw t5, 0(t5) 
+    #         beq t5, a3, ret_f2 
+
+    #         bne t4, t2, loop3_2
+    #     bne t3, t1, loop3_1 
     
     j ret_t2
 

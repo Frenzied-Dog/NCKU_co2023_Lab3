@@ -6,8 +6,8 @@ bool solveSudoku(int board[], int row, int col);
 
 int main() {
 	// int board[] = {-1, 1, 4, -1, -1, 3, -1, 2, -1, -1, 3, -1, -1, -1, -1, -1};
-	// int board[] = {2, -1, -1, -1, -1, -1, 1, -1, -1, 2, -1, -1, -1, -1, -1, 4};
-	int board[] = {-1, 2, 3, -1, 1, -1, -1, 4, 2, -1, -1, 3, -1, 1, 4, -1};
+	int board[] = {2, -1, -1, -1, -1, -1, 1, -1, -1, 2, -1, -1, -1, -1, -1, 4};
+	// int board[] = { -1, 2, 3, -1, 1, -1, -1, 4, 2, -1, -1, 3, -1, 1, 4, -1 };
 	if (solveSudoku(board, 0, 0)) {
 		printf("Solution:\n");
 		for (int i = 0; i < 16; i++) {
@@ -16,7 +16,8 @@ int main() {
 				printf("\n");
 			}
 		}
-	} else {
+	}
+	else {
 		printf("No solution found.\n");
 	}
 	return 0;
@@ -63,13 +64,20 @@ bool isValid(int board[], int row, int col, int num) {
 
 	int baseRow = (row / 2) * 2;
 	int baseCol = (col / 2) * 2;
-	for (int i = baseRow; i <= baseRow + 1; i++) {
-		for (int j = baseCol; j <= baseCol + 1; j++) {
-			if (board[i * 4 + j] == num) {
-				return false;
-			}
+
+	for (int i = 0; i < 4; i++) {
+		if (board[(baseRow + i / 2) * 4 + (baseCol + i % 2)] == num) {
+			return false;
 		}
 	}
+
+	// for (int i = baseRow; i <= baseRow + 1; i++) {
+	// 	for (int j = baseCol; j <= baseCol + 1; j++) {
+	// 		if (board[i * 4 + j] == num) {
+	// 			return false;
+	// 		}
+	// 	}
+	// }
 
 	return true;
 }
