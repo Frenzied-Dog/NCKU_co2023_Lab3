@@ -2,8 +2,8 @@ RISCV=riscv64-unknown-elf
 
 [ ! -d "./output" ] && mkdir ./output
 
-${RISCV}-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -static -Wl,-Ttext=0x0 \
-		$1.S user/user.c user/user.h user/call_to_emu.S \
+${RISCV}-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -static -Wl,-Tlink.ld \
+		start.S $1.S user/user.c user/user.h user/call_to_emu.S \
 		-o ./output/$1.elf -lgcc
 
 ${RISCV}-objcopy -S ./output/$1.elf -O binary ./output/$1.bin

@@ -1,12 +1,12 @@
     .section .text
-    .global _start
+    .global prog
     ##############
     # t1: tmp1
     # t2: tmp2
     # t3: i
     # t4: sp+4i
 
-_start:
+prog:
     tail fibo
 fibo:
     addi sp, sp, -80; # sp = sp -80

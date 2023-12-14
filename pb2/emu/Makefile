@@ -1,8 +1,8 @@
 SRC = main.c emu.c interface.c
 OBJ = $(patsubst %.c, %.o, $(SRC))
 ELF = emu.elf
-# CFLAGS = -Wall -Werror -O2
-CFLAGS = -g -Wall -O0
+CFLAGS = -Wall -Werror -O2
+# CFLAGS = -g -Wall -O0
 RISCV := riscv64-unknown-elf
 RCCFLAGS := -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -static -T ./test/link.ld
 TEST_DIR := ./test

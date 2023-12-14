@@ -42,17 +42,17 @@ int cmd_help(char* args) {
 
 int cmd_c(char* args) {
     /* running */
-    uint64_t count=0;
+    // uint64_t count=0;
     while (!halt) {
         Assert(cpu.PC < MEM_SIZE, "PC is out of memory...");
         inst_t inst_fetched = *(inst_t*)(&cpu.MEM[cpu.PC]);
         bool jumped = operation(inst_fetched);
-        count++;
+        // count++;
         cpu.GPR[0] = 0; // $x0 should always be zero
         if (!jumped) cpu.PC += 4;    // increase PC by 4, go to next instruction
     }
     printf(ANSI_COLOR_YELLOW "End of execution, exit the emulator" ANSI_COLOR_RESET "\n");
-    printf("%lu\n", count);
+    // printf("%lu\n", count);
     // printf("$gp:%d $a2:%d\n", cpu.GPR[3], cpu.GPR[12]);
     return 0;
 }
